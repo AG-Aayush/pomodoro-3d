@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pomodoro 3D</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">Pomo<span>doro</span> 3D</div>
+    <div class="mode-pill">
+      <button class="active" id="btn-focus"  onclick="setMode('focus')">Focus</button>
+      <button                id="btn-short"  onclick="setMode('short')">Short Break</button>
+      <button                id="btn-long"   onclick="setMode('long')">Long Break</button>
+    </div>
+  </header>
+
+  <!-- CANVAS + TIMER -->
+  <div class="canvas-area">
+    <canvas id="three-canvas" width="460" height="340"></canvas>
+
+    <div class="time-display">
+      <div class="time-big" id="time-display">25:00</div>
+      <div class="time-label" id="time-label">Focus Session</div>
+    </div>
+
+    <div class="controls">
+      <button class="btn btn-ghost" onclick="resetTimer()"  title="Reset">↺</button>
+      <button class="btn btn-main"  id="start-btn" onclick="toggleTimer()">START</button>
+      <button class="btn btn-ghost" onclick="skipSession()" title="Skip">⏭</button>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- Duration Config -->
+    <div class="panel">
+      <div class="panel-title">Durations (min)</div>
+
+      <div class="duration-row">
+        <span class="duration-label">Focus</span>
+        <div class="duration-ctrl">
+          <button onclick="changeDuration('focus', -1)">−</button>
+          <span class="duration-val" id="dur-focus">25</span>
+          <button onclick="changeDuration('focus',  1)">+</button>
+        </div>
+      </div>
+
+      <div class="duration-row">
+        <span class="duration-label">Short Break</span>
+        <div class="duration-ctrl">
+          <button onclick="changeDuration('short', -1)">−</button>
+          <span class="duration-val" id="dur-short">5</span>
+          <button onclick="changeDuration('short',  1)">+</button>
+        </div>
+      </div>
+
+      <div class="duration-row">
+        <span class="duration-label">Long Break</span>
+        <div class="duration-ctrl">
+          <button onclick="changeDuration('long', -1)">−</button>
+          <span class="duration-val" id="dur-long">20</span>
+          <button onclick="changeDuration('long',  1)">+</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="panel">
+      <div class="panel-title">Today's Stats</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-val accent" id="stat-pomodoros">0</div>
+          <div class="stat-label">Pomodoros</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val green" id="stat-focus-time">0m</div>
+          <div class="stat-label">Focus Time</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" id="stat-breaks">0</div>
+          <div class="stat-label">Breaks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val" id="stat-streak">0</div>
+          <div class="stat-label">Best Streak</div>
+        </div>
+      </div>
+
+      <!-- Cycle dots -->
+      <div style="margin-top:14px;">
+        <div class="panel-title" style="margin-bottom:8px;">Cycle (4 = long break)</div>
+        <div class="pomo-dots" id="pomo-dots">
+          <div class="pomo-dot"></div>
+          <div class="pomo-dot"></div>
+          <div class="pomo-dot"></div>
+          <div class="pomo-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Session Log -->
+    <div class="panel" style="flex:1; min-height:0;">
+      <div class="panel-title">Session Log</div>
+      <div class="session-log" id="session-log">
+        <div class="empty-log">No sessions yet — start focusing!</div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Drag the apple to rotate freely</span>
+    <span id="footer-date"></span>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- Three.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<!-- App scripts (scene must load before timer) -->
+<script src="js/scene.js"></script>
+<script src="js/timer.js"></script>
+
+<!-- Boot: initialise 3D scene after DOM is ready -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initScene();
+    // Draw the initial full progress ring
+    window.updateProgressRing(25 * 60, 25 * 60, 'focus');
+  });
+</script>
+
+</body>
+</html>
