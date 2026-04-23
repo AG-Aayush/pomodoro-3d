@@ -81,7 +81,12 @@ function skipSession() {
 
 // ── SESSION COMPLETE ──────────────────────────────────────────────────────────
 function onSessionComplete(skipped = false) {
-  const labelMap = { focus: 'Focus Session', short: 'Short Break', long: 'Long Break' };
+  if (!skipped) playSessionSound();
+  const labelMap = { 
+    focus: 'Focus Session', 
+    short: 'Short Break',
+    long: 'Long Break' 
+  };
 
   if (!skipped) {
     if (currentMode === 'focus') {
@@ -197,3 +202,20 @@ document.addEventListener('DOMContentLoaded', () => {
   updateDisplay();
   updateStats();
 });
+
+function playSessionSound(){
+  let id = "";
+
+  if(currentMode === "focus") id = "focus-audio";
+  if(currentMode === "short") id = "short-audio";
+  if(currentMode === "long") id = "long-audio";
+
+  const audio = document.getElementById(id);
+
+  if(audio){
+    audio.currentTime = 0;
+    audio.play().catch(err => console.log(err));;
+  }
+
+  
+}

@@ -190,3 +190,23 @@ function initScene() {
 window.setAppleColor = function (hex) {
   if (appleBody) appleBody.material.color.setHex(hex);
 };
+
+function openProfileImage(){
+  document.getElementById("image-viewer").classList.add("show");
+}
+
+document.addEventListener("click", function(e){
+
+  const viewer = document.getElementById("image-viewer");
+  const pic = document.querySelector(".profile-pic");
+  const img = document.querySelector(".viewer-img");
+
+  if(
+    viewer.classList.contains("show") &&
+    !img.contains(e.target) &&
+    !pic.contains(e.target)
+  ){
+    viewer.classList.remove("show");
+  }
+
+});

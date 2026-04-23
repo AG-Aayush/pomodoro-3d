@@ -6,6 +6,7 @@
   <title>Pomodoro 3D</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
@@ -118,11 +119,40 @@
 
   <!-- FOOTER -->
   <footer>
-    <span>Drag the apple to rotate freely</span>
-    <span id="footer-date"></span>
-  </footer>
 
-</div>
+  <span>Drag the apple to rotate freely</span>
+
+  <div class="footer-right">
+
+    <span id="footer-date"></span>
+
+    <div class="profile-wrap">
+      <img src="images/Aayush-profile.jpeg" alt="Profile Picture" class="profile-pic" onclick="openProfileImage()">
+
+      <div class="profile-menu">
+        <a href="https://github.com/AG-Aayush" target="_blank" rel="noopener">
+        <i class="fa-brands fa-github"></i> 
+        </a>
+
+        <a href="https://www.linkedin.com/in/aay-ush-8b5b34349/" target="_blank" rel="noopener">
+        <i class="fa-brands fa-linkedin-in"></i> 
+        </a>
+
+        <a href="https://www.instagram.com/ayushgnawali/" target="_blank" rel="noopener">
+        <i class="fa-brands fa-instagram"></i>
+        </a>
+
+        <a href="https://articalgeek.medium.com/" target="_blank" rel="noopener">
+        <i class="fa-brands fa-medium"></i>
+        </a>
+
+      </div>
+    
+    </div>
+
+  </div>
+
+</footer>
 
 <div class="toast" id="toast"></div>
 
@@ -141,6 +171,14 @@
     window.updateProgressRing(25 * 60, 25 * 60, 'focus');
   });
 </script>
+
+<div class="image-viewer" id="image-viewer">
+  <img src="images/Aayush-profile.jpeg"  alt=""Profile Picture class="viewer-img">
+</div>
+
+<audio id="focus-audio" src="sounds/focus.mp3"></audio>
+<audio id="short-audio" src="sounds/short.mp3"></audio>
+<audio id="long-audio" src="sounds/long.mp3"></audio>
 
 </body>
 </html>
